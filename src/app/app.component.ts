@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'WebSocketFront';
+  stock: any = {};
+
+  private webSocket: WebSocket;
+
+  constructor() {
+    this.webSocket = new WebSocket('ws://localhost:8054/stocks');
+    this.webSocket.onmessage = (event) => {
+      this.stock = JSON.parse(event.data)
+    };
+  }
 }
